@@ -35,8 +35,7 @@ services:
       - $PWD/db:/data
     networks:
       - agenda-display-network
-    command:
-      - "redis-server --save 120 1 --appendonly yes"
+    command: "redis-server --save 120 1 --appendonly yes"
 
 networks:
   agenda-display-network:
