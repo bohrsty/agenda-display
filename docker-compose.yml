@@ -1,0 +1,43 @@
+#
+# This file is part of the agenda-display project.
+#
+# (c) Nils Bohrs
+#
+# For the full copyright and license information, please view the LICENSE.md
+# file that was distributed with this source code.
+#
+
+version: "3"
+services:
+  server:
+    image: "node:alpine"
+    restart: always
+    env_file:
+      - .env
+    user: "node"
+    working_dir: /home/node/app
+    volumes:
+      - $PWD:/home/node/app
+    ports:
+      - "3000:3000"
+    depends_on:
+      - redis
+    links:
+      - redis
+    command: "npm start"
+    networks:
+      - agenda-display-network
+
+  redis:
+    image: redis:7-alpine
+    restart: always
+    volumes:
+      - $PWD/db:/data
+    networks:
+      - agenda-display-network
+    command:
+      - "redis-server --save 120 1 --appendonly yes"
+
+networks:
+  agenda-display-network:
+    driver: bridge
