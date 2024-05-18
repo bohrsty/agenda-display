@@ -7,7 +7,6 @@
 # file that was distributed with this source code.
 #
 
-version: "3"
 services:
   server:
     image: "node:alpine"
