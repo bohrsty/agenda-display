@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 ### Added
+- translation context and provider
 - global state context and provider
 - loading context and provider
 - color mode context and provider
