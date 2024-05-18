@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 ### Added
+- material design
 - redis client
 - config api endpoint
 - required packages and client and server endpoints
