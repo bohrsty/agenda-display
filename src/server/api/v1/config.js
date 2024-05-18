@@ -18,6 +18,7 @@ export const config = (req, res) => {
     return({
         config: {
             appTitle: process.env.APP_TITLE,
+            fallbackLocale: process.env.FALLBACK_LOCALE,
         },
     });
 }
