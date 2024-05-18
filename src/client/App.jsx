@@ -17,6 +17,7 @@ import {
     createTheme,
     ThemeProvider,
 } from '@mui/material/styles'
+import { ColorModeProvider } from './contexts/ColorModeContext.jsx';
 
 export const App = () => {
     // check color mode preference
@@ -47,8 +48,10 @@ export const App = () => {
 
     // render jsx
     return(
-        <ThemeProvider theme={theme}>
-            <div>agenda-display</div>
-        </ThemeProvider>
+        <ColorModeProvider value={colorMode}>
+            <ThemeProvider theme={theme}>
+                <div>agenda-display</div>
+            </ThemeProvider>
+        </ColorModeProvider>
     );
 }
