@@ -21,6 +21,7 @@ import { ColorModeProvider } from './contexts/ColorModeContext.jsx';
 import { LoadingProvider } from './contexts/LoadingContext.jsx';
 import { GlobalStateProvider } from './contexts/GlobalStateContext.jsx';
 import { LocalizationProvider } from './contexts/LocalisationContext.jsx';
+import { UiBase } from './UiBase.jsx';
 
 export const App = () => {
     // check color mode preference
@@ -56,7 +57,7 @@ export const App = () => {
                 <LoadingProvider>
                     <ColorModeProvider value={colorMode}>
                         <ThemeProvider theme={theme}>
-                            <div>agenda-display</div>
+                            <UiBase />
                         </ThemeProvider>
                     </ColorModeProvider>
                 </LoadingProvider>

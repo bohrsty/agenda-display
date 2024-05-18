@@ -10,4 +10,8 @@
 
 export const de = {
     'Missing translation': 'Übersetzung fehlt',
+    'An unexpected error occurred! Goto {{link}} and try again.': 'Ein unerwarteter Fehler ist aufgetreten! Gehe zur {{link}} und versuche es erneut.',
+    'Version: {{version}}': 'Version: {{version}}',
+    'Change to light mode': 'Zu hellem Modus wechseln',
+    'Change to dark mode': 'Zu dunklem Modus wechseln',
 }
