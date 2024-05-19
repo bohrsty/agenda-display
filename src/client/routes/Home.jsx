@@ -8,7 +8,12 @@
  */
 'use strict';
 
-import React from 'react';
+import React, {
+    useState,
+    useEffect,
+} from 'react';
+import { Agenda } from '../Agenda.jsx';
+import { useApiUtils } from '../utils/ApiUtils.jsx';
 
 /**
  * component to display the content of the home page
@@ -16,7 +21,22 @@ import React from 'react';
  * @constructor
  */
 export const Home = () => {
+    // prepare agenda state
+    const [agenda, setAgenda] = useState([]);
+    // get api hook
+    const { _get } = useApiUtils();
+
+    // fetch agenda from api
+    useEffect(() => {
+        (async () => {
+            await _get('/api/v1/agenda', (response) => {
+                setAgenda(response.data.payload.agenda);
+            });
+        })();
+    }, []);
 
     // render jsx
-    return <div>Home</div>;
+    return (
+        <Agenda agenda={agenda} />
+    );
 }

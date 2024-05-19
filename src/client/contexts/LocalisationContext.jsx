@@ -16,6 +16,7 @@ import {
     useState,
     useEffect,
 } from 'react';
+import { de as dfnsDe } from 'date-fns/locale/de';
 import { useGlobalState } from './GlobalStateContext.jsx';
 import { de } from '../i18n/de/de.jsx'
 
@@ -24,6 +25,7 @@ const LocalizationContext = createContext({
     t: (scope, options) => {},
     locale: '',
     setLocale: (locale) => {},
+    dfnsLocale: {},
 });
 
 /**
@@ -52,6 +54,13 @@ export const LocalizationProvider = ({ children }) => {
         'de_de': de,
         'de-DE': de,
         'de': de,
+    };
+
+    // prepare date-fns locales
+    const dfnsLocales = {
+        'de_de': dfnsDe,
+        'de-DE': dfnsDe,
+        'de': dfnsDe,
     };
 
     // check locale and fallback
@@ -158,6 +167,7 @@ export const LocalizationProvider = ({ children }) => {
             t: t,
             locale: currentLocale,
             setLocale: setLocale,
+            dfnsLocale: dfnsLocales[currentLocale],
         }}>
             {children}
         </LocalizationContext.Provider>

@@ -6,8 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased](https://github.com/bohrsty/agenda-display/compare/v0.1.0...HEAD)
 ### Added
+- agenda components
+- date-fns for date manipulation
+- api endpoint for agenda (data mocked)
 
 ### Changed
+- LocalisationContext to provide date-fns locale
 
 ## [v0.1.0](https://github.com/bohrsty/agenda-display/compare/81c0b52...v0.1.0)
 ### Added

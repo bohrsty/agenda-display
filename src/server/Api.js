@@ -9,6 +9,7 @@
 'use strict';
 
 import { config as _getConfig } from './api/v1/config.js';
+import { agenda as _getAgenda } from './api/v1/agenda.js';
 
 /**
  * fills the data in the api response template and returns it as json
@@ -52,4 +53,6 @@ export const loadApi = (app) => {
 
     // api handler for GET /api/v1/config
     app.get('/api/v1/config', (req, res) => responseBody(req, res, '/api/v1/config', _getConfig));
+    // api handler for GET /api/v1/agenda
+    app.get('/api/v1/agenda', (req, res) => responseBody(req, res, '/api/v1/agenda', _getAgenda));
 }
