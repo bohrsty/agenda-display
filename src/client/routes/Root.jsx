@@ -35,7 +35,7 @@ export const Root = () => {
                 sx={{
                     display: 'flex',
                     flexGrow: 1,
-                    pt: 8,
+                    pt: 3,
                     pb: 3,
                     px: 3,
                     mb: 6,

@@ -11,6 +11,7 @@
 import { ErrorPage } from './ErrorPage.jsx';
 import { Root } from './routes/Root.jsx';
 import { Home } from './routes/Home.jsx';
+import { Settings } from './routes/Settings.jsx';
 
 // create router for the app
 export const router = {
@@ -21,6 +22,10 @@ export const router = {
         {
             index: true,
             element: <Home />,
+        },
+        {
+            path: '/settings',
+            element: <Settings />,
         },
     ]
 };

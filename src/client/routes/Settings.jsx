@@ -15,8 +15,8 @@ import React from 'react';
  * @returns {JSX.Element}
  * @constructor
  */
-export const Home = () => {
+export const Settings = () => {
 
     // render jsx
-    return <div>Home</div>;
+    return <div>Settings</div>;
 }

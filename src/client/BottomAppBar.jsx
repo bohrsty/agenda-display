@@ -15,8 +15,12 @@ import Tooltip from "@mui/material/Tooltip";
 import IconButton from "@mui/material/IconButton";
 import LightModeTwoToneIcon from "@mui/icons-material/LightModeTwoTone";
 import ModeNightTwoToneIcon from "@mui/icons-material/ModeNightTwoTone";
+import CachedTwoToneIcon from '@mui/icons-material/CachedTwoTone';
+import SettingsTwoToneIcon from '@mui/icons-material/SettingsTwoTone';
 import AppBar from "@mui/material/AppBar";
 import { useTheme } from "@mui/material/styles";
+import Link from '@mui/material/Link'
+import { Link as RouterLink } from 'react-router-dom';
 import { useTranslation } from "./contexts/LocalisationContext.jsx";
 import { ColorModeContext } from "./contexts/ColorModeContext.jsx";
 import { useGlobalState } from "./contexts/GlobalStateContext.jsx";
@@ -51,9 +55,32 @@ export const BottomAppBar = () => {
                     <IconButton
                         sx={{ ml: 3 }}
                         onClick={toggleColorMode}
-                        color="inherit"
+                        color='{inherit}'
                     >
                         {theme.palette.mode === 'dark' ? <LightModeTwoToneIcon /> : <ModeNightTwoToneIcon />}
+                    </IconButton>
+                </Tooltip>
+                <Tooltip title={t('Settings')}>
+                    <Link
+                        color={'inherit'}
+                        to={'/settings'}
+                        component={RouterLink}
+                    >
+                    <IconButton
+                        sx={{ ml: 3 }}
+                        color={'inherit'}
+                    >
+                        <SettingsTwoToneIcon />
+                    </IconButton>
+                    </Link>
+                </Tooltip>
+                <Tooltip title={t('Refresh')}>
+                    <IconButton
+                        sx={{ ml: 3 }}
+                        color={'inherit'}
+                        onClick={() => {}}
+                    >
+                        <CachedTwoToneIcon />
                     </IconButton>
                 </Tooltip>
             </Toolbar>
