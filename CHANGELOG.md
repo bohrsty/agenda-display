@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - api endpoint for agenda (data mocked)
 
 ### Changed
+- jsdoc to reflect function type correctly in contexts
 - redis image to redis-stack image (support for json module)
 - LocalisationContext to provide date-fns locale
 

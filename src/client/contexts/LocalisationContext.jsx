@@ -30,7 +30,7 @@ const LocalizationContext = createContext({
 
 /**
  *
- * @returns {{t: t, locale: string, setLocale: setLocale}}
+ * @returns {{t: function, locale: string, setLocale: function}}
  */
 export const useTranslation = () => useContext(LocalizationContext);
 

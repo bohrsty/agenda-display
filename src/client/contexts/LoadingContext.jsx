@@ -23,7 +23,7 @@ const LoadingContext = createContext({
 
 /**
  * export loading hook
- * @returns {{isLoading: boolean, stopLoading: stopLoading, startLoading: startLoading}}
+ * @returns {{isLoading: boolean, stopLoading: function, startLoading: function}}
  */
 export const useLoading = () => useContext(LoadingContext);
 

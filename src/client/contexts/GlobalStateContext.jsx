@@ -22,7 +22,7 @@ const GlobalStateContext = createContext({
 
 /**
  * export global state hook
- * @returns {{setState: setState, state: {}}}
+ * @returns {{setState: function, state: {}}}
  */
 export const useGlobalState = () => useContext(GlobalStateContext);
 
