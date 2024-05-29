@@ -20,7 +20,10 @@ import SettingsTwoToneIcon from '@mui/icons-material/SettingsTwoTone';
 import AppBar from "@mui/material/AppBar";
 import { useTheme } from "@mui/material/styles";
 import Link from '@mui/material/Link'
-import { Link as RouterLink } from 'react-router-dom';
+import {
+    Link as RouterLink,
+    useLocation,
+} from 'react-router-dom';
 import { useTranslation } from "./contexts/LocalisationContext.jsx";
 import { ColorModeContext } from "./contexts/ColorModeContext.jsx";
 import { useGlobalState } from "./contexts/GlobalStateContext.jsx";
@@ -34,6 +37,8 @@ export const BottomAppBar = () => {
     const { toggleColorMode } = useContext(ColorModeContext);
     // get global state
     const { state } = useGlobalState();
+    // get location
+    const location = useLocation();
 
     // render jsx
     return(
@@ -60,29 +65,34 @@ export const BottomAppBar = () => {
                         {theme.palette.mode === 'dark' ? <LightModeTwoToneIcon /> : <ModeNightTwoToneIcon />}
                     </IconButton>
                 </Tooltip>
-                <Tooltip title={t('Settings')}>
-                    <Link
-                        color={'inherit'}
-                        to={'/settings'}
-                        component={RouterLink}
-                    >
-                    <IconButton
-                        sx={{ ml: 3 }}
-                        color={'inherit'}
-                    >
-                        <SettingsTwoToneIcon />
-                    </IconButton>
-                    </Link>
-                </Tooltip>
-                <Tooltip title={t('Refresh')}>
-                    <IconButton
-                        sx={{ ml: 3 }}
-                        color={'inherit'}
-                        onClick={() => {}}
-                    >
-                        <CachedTwoToneIcon />
-                    </IconButton>
-                </Tooltip>
+                {location.pathname === '/'
+                    ? <>
+                        <Tooltip title={t('Settings')}>
+                            <Link
+                                color={'inherit'}
+                                to={'/settings'}
+                                component={RouterLink}
+                            >
+                            <IconButton
+                                sx={{ ml: 3 }}
+                                color={'inherit'}
+                            >
+                                <SettingsTwoToneIcon />
+                            </IconButton>
+                            </Link>
+                        </Tooltip>
+                        <Tooltip title={t('Refresh')}>
+                            <IconButton
+                                sx={{ ml: 3 }}
+                                color={'inherit'}
+                                onClick={() => {}}
+                            >
+                                <CachedTwoToneIcon />
+                            </IconButton>
+                        </Tooltip>
+                    </>
+                    : null
+                }
             </Toolbar>
         </AppBar>
     );

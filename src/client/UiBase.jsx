@@ -27,11 +27,16 @@ export const UiBase = () => {
     // get api hook
     const { _get } = useApiUtils();
 
-    // fetch config from api
+    // fetch initial values from api
     useEffect(() => {
         (async () => {
+            // get config
             await _get('/api/v1/config', (response) => {
-                setState({...state, config: response.data.payload.config, version: response.data.version});
+                setState((oldState) => ({...oldState, config: response.data.payload.config, version: response.data.version}));
+            });
+            // get settings
+            await _get('/api/v1/settings', (response) => {
+                setState((oldState) => ({...oldState, settings: response.data.payload.settings}));
             });
         })();
     }, []);

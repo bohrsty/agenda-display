@@ -38,6 +38,10 @@ export const GlobalStateProvider = ({ children }) => {
             fallbackLocale: '',
             appTitle: '',
         },
+        settings: {
+            refreshTimout: 0,
+            calendars: [],
+        },
         version: '',
     });
 

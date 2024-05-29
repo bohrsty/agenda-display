@@ -23,7 +23,29 @@ app.set('trust proxy', true);
 const redisClient = createClient({
     url: `redis://${process.env.REDIS_HOST || 'redis'}:${process.env.REDIS_PORT || '6379'}`,
 });
-await redisClient.connect();
+await redisClient
+    .on('error', err => console.log('Redis Client Error', err))
+    .connect();
+// check if settings are available and create them if not
+const result = await redisClient.json.get('agendadisplay:settings', { path: '$' });
+if(result === null) {
+    // create settings structure
+    await redisClient.json.set('agendadisplay:settings', '$', {
+        timeout: 0,
+        calendars: [],
+    });
+} else {
+    // check if settings exists
+    const json = result[0];
+    // timeout
+    if(json.hasOwnProperty('refreshTimeout') === false) {
+        await redisClient.json.set('agendadisplay:settings', '$.refreshTimeout', 0);
+    }
+    // calendars
+    if(json.hasOwnProperty('calendars') === false) {
+        await redisClient.json.set('agendadisplay:settings', '$.calendars', []);
+    }
+}
 
 // add redis client to app (locals), to use in requests as "req.app.locals.redis"
 app.locals.redis = redisClient;

@@ -10,6 +10,13 @@
 
 import { config as _getConfig } from './api/v1/config.js';
 import { agenda as _getAgenda } from './api/v1/agenda.js';
+import {
+    getSettings as _getSettings,
+    deleteSettingCalendar as _deleteSettingCalendar,
+    updateTimeoutSetting as _updateTimeoutSetting,
+    newSettingCalendar as _newSettingCalendar,
+    updateSettingCalendar as _updateSettingCalendar,
+} from './api/v1/settings.js';
 
 /**
  * fills the data in the api response template and returns it as json
@@ -55,4 +62,14 @@ export const loadApi = (app) => {
     app.get('/api/v1/config', (req, res) => responseBody(req, res, '/api/v1/config', _getConfig));
     // api handler for GET /api/v1/agenda
     app.get('/api/v1/agenda', (req, res) => responseBody(req, res, '/api/v1/agenda', _getAgenda));
+    // api handler for GET /api/v1/settings
+    app.get('/api/v1/settings', (req, res) => responseBody(req, res, '/api/v1/settings', _getSettings));
+    // api handler for DELETE /api/v1/settings/calendar
+    app.delete('/api/v1/settings/calendar', (req, res) => responseBody(req, res, '/api/v1/settings/calendar', _deleteSettingCalendar));
+    // api handler for POST /api/v1/settings/calendar
+    app.post('/api/v1/settings/calendar', (req, res) => responseBody(req, res, '/api/v1/settings/calendar', _newSettingCalendar));
+    // api handler for PATCH /api/v1/settings/calendar
+    app.patch('/api/v1/settings/calendar', (req, res) => responseBody(req, res, '/api/v1/settings/calendar', _updateSettingCalendar));
+    // api handler for PATCH /api/v1/settings/refreshTimeout
+    app.patch('/api/v1/settings/refreshTimeout', (req, res) => responseBody(req, res, '/api/v1/settings/refreshTimeout', _updateTimeoutSetting));
 }

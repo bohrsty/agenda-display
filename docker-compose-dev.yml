@@ -29,15 +29,16 @@ services:
       - agenda-display-network
 
   redis:
-    image: redis:7-alpine
+    image: redis/redis-stack-server:latest
     restart: always
     volumes:
       - $PWD/db:/data
     ports:
       - "127.0.0.1:6379:6379"
+    environment:
+      - "REDIS_ARGS=--save 120 1 --appendonly yes"
     networks:
       - agenda-display-network
-    command: "redis-server --save 120 1 --appendonly yes"
 
 networks:
   agenda-display-network:
