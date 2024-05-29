@@ -37,6 +37,7 @@ export const GlobalStateProvider = ({ children }) => {
         config: {
             fallbackLocale: '',
             appTitle: '',
+            calendarColors: [],
         },
         settings: {
             refreshTimout: 0,

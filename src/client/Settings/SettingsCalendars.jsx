@@ -32,6 +32,7 @@ export const SettingsCalendars = () => {
             name: '',
             username: '',
             url: '',
+            color: '',
         },
     });
     // get global state
@@ -123,6 +124,7 @@ export const SettingsCalendars = () => {
                                 name: '',
                                 username: '',
                                 url: '',
+                                color: '',
                             },
                         })}
                         sx={{

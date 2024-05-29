@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased](https://github.com/bohrsty/agenda-display/compare/v0.1.0...HEAD)
 ### Added
+- color picker
+- colors in environment, config and global state
 - settings ui (timeout and caldav connections)
 - settings api endpoints
 - check for settings json in redis
@@ -16,6 +18,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - api endpoint for agenda (data mocked)
 
 ### Changed
+- caldav connection form to add color
+- config api endpoint to deliver calendar colors
 - jsdoc to reflect function type correctly in contexts
 - redis image to redis-stack image (support for json module)
 - LocalisationContext to provide date-fns locale

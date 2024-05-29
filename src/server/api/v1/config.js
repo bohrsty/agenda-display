@@ -19,6 +19,7 @@ export const config = (req, res) => {
         config: {
             appTitle: process.env.APP_TITLE,
             fallbackLocale: process.env.FALLBACK_LOCALE,
+            calendarColors: process.env.CALENDAR_COLORS.split(',').map((color) => `#${color}`),
         },
     });
 }

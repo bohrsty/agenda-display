@@ -36,4 +36,9 @@ export const de = {
     'Connection name': 'Name der Verbindung',
     'Username': 'Benutzername',
     'Connection URL': 'Verbindungs-URL',
+    'Select color {{color}}': 'Farbe {{color}} auswählen',
+    'Select color': 'Farbe auswählen',
+    'Unselect color': 'Farbe entfernen',
+    'Calendar color': 'Farbe des Kalenders',
+    'Select calendar color': 'Kalenderfarbe auswählen',
 }

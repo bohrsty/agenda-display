@@ -17,10 +17,14 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import { useTranslation } from '../contexts/LocalisationContext.jsx';
+import { ColorPicker } from '../ColorPicker.jsx';
+import { useGlobalState } from '../contexts/GlobalStateContext.jsx';
 
 export const SettingsCalendarItemForm = ({ open, handleSave, handleCancel, data, setData }) => {
     // get translation
     const { t } = useTranslation();
+    // get global state
+    const { state } = useGlobalState();
 
     // render jsx
     return (
@@ -61,6 +65,20 @@ export const SettingsCalendarItemForm = ({ open, handleSave, handleCancel, data,
                     type={'text'}
                     value={data.calendar.url}
                     onChange={(event) => setData({...data, calendar: {...data.calendar, url: event.target.value}})}
+                    sx={{
+                        width: '350px',
+                        ml: 2,
+                        mb: 2,
+                    }}
+                />
+                <ColorPicker
+                    colors={state.config.calendarColors}
+                    label={t('Calendar color')}
+                    placeholder={t('Calendar color')}
+                    isDisabled={false}
+                    isRequired={true}
+                    value={data.calendar.color}
+                    onChange={(color) => setData({...data, calendar: {...data.calendar, color: color}})}
                     sx={{
                         width: '350px',
                         ml: 2,
