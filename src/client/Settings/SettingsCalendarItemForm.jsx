@@ -59,6 +59,19 @@ export const SettingsCalendarItemForm = ({ open, handleSave, handleCancel, data,
                     }}
                 />
                 <TextField
+                    required={data.type === 'new'}
+                    placeholder={data.type === 'new' ? t('Password') : t('Enter new password to change it')}
+                    label={data.type === 'new' ? t('Password') : t('Enter new password to change it')}
+                    type={'password'}
+                    value={data.calendar.password}
+                    onChange={(event) => setData({...data, calendar: {...data.calendar, password: event.target.value}})}
+                    sx={{
+                        width: '350px',
+                        ml: 2,
+                        mb: 2,
+                    }}
+                />
+                <TextField
                     required={true}
                     placeholder={t('Connection URL')}
                     label={t('Connection URL')}

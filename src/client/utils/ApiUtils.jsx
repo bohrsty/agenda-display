@@ -43,8 +43,8 @@ export const useApiUtils = () => {
             } else {
                 console.warn('callback is not a valid function');
             }
-        } catch (e) {
-            console.error(e);
+        } catch(exception) {
+            throw exception;
         } finally {
             // stop loading
             stopLoading(`GET${url}`);
@@ -66,13 +66,8 @@ export const useApiUtils = () => {
             if(typeof callback === 'function') {
                 callback(response);
             }
-        } catch(e) {
-            console.error(e);
-            // check error
-            if(e.constructor.name === 'ApiException') {
-                throw new ApiException(e.error, e.errorMessage);
-            }
-            throw new Error(e.message);
+        } catch(exception) {
+            throw exception;
         } finally {
             // stop loading
             stopLoading(`POST${url}`);
@@ -94,13 +89,8 @@ export const useApiUtils = () => {
             if(typeof callback === 'function') {
                 callback(response);
             }
-        } catch(e) {
-            console.error(e);
-            // check error
-            if(e.constructor.name === 'ApiException') {
-                throw new ApiException(e.error, e.errorMessage);
-            }
-            throw new Error(e.message);
+        } catch(exception) {
+            throw exception;
         } finally {
             // stop loading
             stopLoading(`PATCH${url}`);
@@ -122,13 +112,8 @@ export const useApiUtils = () => {
             if(typeof callback === 'function') {
                 callback(response);
             }
-        } catch(e) {
-            console.error(e);
-            // check error
-            if(e.constructor.name === 'ApiException') {
-                throw new ApiException(e.error, e.errorMessage);
-            }
-            throw new Error(e.message);
+        } catch(exception) {
+            throw exception;
         } finally {
             // stop loading
             stopLoading(`DELETE${url}`);

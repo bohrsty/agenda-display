@@ -41,4 +41,6 @@ export const de = {
     'Unselect color': 'Farbe entfernen',
     'Calendar color': 'Farbe des Kalenders',
     'Select calendar color': 'Kalenderfarbe auswählen',
+    'Password': 'Passwort',
+    'Enter new password to change it': 'Neues Passwort eingeben, um es zu ändern'
 }

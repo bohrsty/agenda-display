@@ -44,6 +44,7 @@ export const SettingsCalendars = () => {
 
     // event handler to edit connection
     const handleEditConnection = (calendar) => {
+        calendar. password = '';
         setCalendarForm({
             type: 'edit',
             calendar: calendar,
@@ -123,6 +124,7 @@ export const SettingsCalendars = () => {
                             calendar: {
                                 name: '',
                                 username: '',
+                                password: '',
                                 url: '',
                                 color: '',
                             },

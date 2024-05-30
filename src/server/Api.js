@@ -37,8 +37,8 @@ const responseBody = async (req, res, url, handler) => {
         payload = await handler(req, res);
     } catch (e) {
         status = 'ERROR';
-        error = e.errorType;
-        errorMessage = e.errorMessage;
+        error = e.errorType || 'ERROR';
+        errorMessage = e.errorMessage || e.message;
     }
     // return api data
     return res.json({

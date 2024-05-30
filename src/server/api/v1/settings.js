@@ -10,6 +10,7 @@
 
 import { nanoid } from 'nanoid';
 import { ApiException } from '../../exceptions/ApiException.js';
+import { useCryptr } from '../../utils.js';
 
 /**
  * collect and return settings
@@ -20,8 +21,15 @@ import { ApiException } from '../../exceptions/ApiException.js';
 export const getSettings = async (req, res) => {
     // get settings
     const result = await req.app.locals.redis.json.get('agendadisplay:settings', { path: '$' });
+    const settings = {
+        refreshTimeout: result[0].refreshTimeout,
+        calendars: result[0].calendars.map((calendar) => {
+            delete calendar.password;
+            return calendar;
+        }),
+    }
     return({
-        settings: result[0],
+        settings: settings,
     });
 }
 
@@ -56,6 +64,8 @@ export const deleteSettingCalendar = async (req, res) => {
  * @throws {ApiException}
  */
 export const newSettingCalendar = async (req, res) => {
+    // get encrypt
+    const { encrypt } = useCryptr();
     // prepare db query
     const newCalendar = { ...req.body };
     // check if calendar is given
@@ -64,6 +74,8 @@ export const newSettingCalendar = async (req, res) => {
     }
     // add id
     newCalendar.calendar.id = nanoid();
+    // encrypt password
+    newCalendar.calendar.password = encrypt(newCalendar.calendar.password);
     // insert calendar
     await req.app.locals.redis.json.arrAppend('agendadisplay:settings', '$.calendars', newCalendar.calendar);
 
@@ -79,6 +91,8 @@ export const newSettingCalendar = async (req, res) => {
  * @throws {ApiException}
  */
 export const updateSettingCalendar = async (req, res) => {
+    // get encrypt
+    const { encrypt } = useCryptr();
     // prepare db query
     const updateCalendar = { ...req.body };
     // check if calendar is given
@@ -87,6 +101,15 @@ export const updateSettingCalendar = async (req, res) => {
     }
     // get id
     const id = updateCalendar.calendar.id;
+    // check password
+    if(updateCalendar.calendar.password.length > 0) {
+        // encrypt new password
+        updateCalendar.calendar.password = encrypt(updateCalendar.calendar.password);
+    } else {
+        // use current password
+        const result = await req.app.locals.redis.json.get('agendadisplay:settings', `$.calendars[?(@id == "${id}")]`);
+        updateCalendar.calendar.password = result[0].password;
+    }
     // update calendar
     await req.app.locals.redis.json.set('agendadisplay:settings', `$.calendars[?(@id == "${id}")]`, updateCalendar.calendar);
 
