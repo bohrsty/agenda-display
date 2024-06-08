@@ -27,6 +27,7 @@ import {
 import { useTranslation } from "./contexts/LocalisationContext.jsx";
 import { ColorModeContext } from "./contexts/ColorModeContext.jsx";
 import { useGlobalState } from "./contexts/GlobalStateContext.jsx";
+import { useApiUtils } from './utils/ApiUtils.jsx';
 
 export const BottomAppBar = () => {
     // get theme
@@ -36,9 +37,11 @@ export const BottomAppBar = () => {
     // get toggleColorMode from context
     const { toggleColorMode } = useContext(ColorModeContext);
     // get global state
-    const { state } = useGlobalState();
+    const { state, setState } = useGlobalState();
     // get location
     const location = useLocation();
+    // get api utils
+    const { _get } = useApiUtils();
 
     // render jsx
     return(
@@ -85,7 +88,11 @@ export const BottomAppBar = () => {
                             <IconButton
                                 sx={{ ml: 3 }}
                                 color={'inherit'}
-                                onClick={() => {}}
+                                onClick={async () => {
+                                    await _get('/api/v1/agenda', (response) => {
+                                        setState((oldState) => ({ ...oldState, agenda: response.data.payload.agenda }));
+                                    });
+                                }}
                             >
                                 <CachedTwoToneIcon />
                             </IconButton>

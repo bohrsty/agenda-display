@@ -8,12 +8,10 @@
  */
 'use strict';
 
-import React, {
-    useState,
-    useEffect,
-} from 'react';
+import React, { useEffect } from 'react';
 import { Agenda } from '../Agenda.jsx';
 import { useApiUtils } from '../utils/ApiUtils.jsx';
+import { useGlobalState } from '../contexts/GlobalStateContext.jsx';
 
 /**
  * component to display the content of the home page
@@ -21,22 +19,31 @@ import { useApiUtils } from '../utils/ApiUtils.jsx';
  * @constructor
  */
 export const Home = () => {
-    // prepare agenda state
-    const [agenda, setAgenda] = useState([]);
     // get api hook
     const { _get } = useApiUtils();
+    // get global state
+    const { state, setState } = useGlobalState();
 
     // fetch agenda from api
     useEffect(() => {
+        // load agenda data initially
         (async () => {
             await _get('/api/v1/agenda', (response) => {
-                setAgenda(response.data.payload.agenda);
+                setState((oldState) => ({ ...oldState, agenda: response.data.payload.agenda }));
             });
         })();
-    }, []);
+        // set refresh interval
+        const interval = setInterval(async () => {
+            await _get('/api/v1/agenda', (response) => {
+                setState((oldState) => ({ ...oldState, agenda: response.data.payload.agenda }));
+            });
+        }, (state.settings.refreshTimeout === 0 ? 1 : state.settings.refreshTimeout) * 60 * 1000);
+        // return cleanup
+        return () => clearInterval(interval)
+    }, [state.settings.refreshTimeout]);
 
     // render jsx
     return (
-        <Agenda agenda={agenda} />
+        <Agenda agenda={state.agenda} />
     );
 }

@@ -40,10 +40,11 @@ export const GlobalStateProvider = ({ children }) => {
             calendarColors: [],
         },
         settings: {
-            refreshTimout: 0,
+            refreshTimeout: 0,
             calendars: [],
         },
         version: '',
+        agenda:[],
     });
 
     // render jsx
