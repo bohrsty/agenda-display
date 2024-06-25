@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased](https://github.com/bohrsty/agenda-display/compare/v0.1.0...HEAD)
 ### Added
+- agenda length setting in api
+- api endpoint to get dav calendars and entries
+- function to parse dav, apply recurrence, merge calendars and sort events
 - interval to refresh agenda every "timeout minutes"
 - password field to calendar setting
 - color picker
@@ -20,6 +23,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - api endpoint for agenda (data mocked)
 
 ### Changed
+- first agenda section to be named "today"
+- agenda api result field names (from=start, to=end)
+- agenda item to correspond with changed api result
+- order and formatting of agenda item elements
 - refresh button to refresh agenda manually
 - api endpoint to encrypt password in redis
 - optimized error handling using api calls in ui

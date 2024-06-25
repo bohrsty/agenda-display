@@ -42,5 +42,7 @@ export const de = {
     'Calendar color': 'Farbe des Kalenders',
     'Select calendar color': 'Kalenderfarbe auswählen',
     'Password': 'Passwort',
-    'Enter new password to change it': 'Neues Passwort eingeben, um es zu ändern'
+    'Enter new password to change it': 'Neues Passwort eingeben, um es zu ändern',
+    'Today': 'Heute',
+    'o\'clock': 'Uhr',
 }

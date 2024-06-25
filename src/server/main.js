@@ -33,6 +33,7 @@ if(result === null) {
     await redisClient.json.set('agendadisplay:settings', '$', {
         timeout: 0,
         calendars: [],
+        agendaLength: 7,
     });
 } else {
     // check if settings exists
@@ -44,6 +45,10 @@ if(result === null) {
     // calendars
     if(json.hasOwnProperty('calendars') === false) {
         await redisClient.json.set('agendadisplay:settings', '$.calendars', []);
+    }
+    // agendaLength
+    if(json.hasOwnProperty('agendaLength') === false) {
+        await redisClient.json.set('agendadisplay:settings', '$.agendaLength', 7);
     }
 }
 

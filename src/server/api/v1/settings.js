@@ -27,6 +27,7 @@ export const getSettings = async (req, res) => {
             delete calendar.password;
             return calendar;
         }),
+        agendaLength: result[0].agendaLength,
     }
     return({
         settings: settings,
