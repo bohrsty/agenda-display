@@ -16,6 +16,7 @@ import {
     updateTimeoutSetting as _updateTimeoutSetting,
     newSettingCalendar as _newSettingCalendar,
     updateSettingCalendar as _updateSettingCalendar,
+    fetchCalendars as _fetchCalendars,
 } from './api/v1/settings.js';
 
 /**
@@ -72,4 +73,6 @@ export const loadApi = (app) => {
     app.patch('/api/v1/settings/calendar', (req, res) => responseBody(req, res, '/api/v1/settings/calendar', _updateSettingCalendar));
     // api handler for PATCH /api/v1/settings/refreshTimeout
     app.patch('/api/v1/settings/refreshTimeout', (req, res) => responseBody(req, res, '/api/v1/settings/refreshTimeout', _updateTimeoutSetting));
+    // api handler for POST /api/v1/settings/fetchCalendars
+    app.post('/api/v1/settings/fetchCalendars', (req, res) => responseBody(req, res, '/api/v1/settings/fetchCalendars', _fetchCalendars));
 }

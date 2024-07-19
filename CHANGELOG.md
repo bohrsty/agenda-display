@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased](https://github.com/bohrsty/agenda-display/compare/v0.1.0...HEAD)
 ### Added
+- detection of calendars in settings
+- determination of text color according to background color in agenda item
 - agenda length setting in api
 - api endpoint to get dav calendars and entries
 - function to parse dav, apply recurrence, merge calendars and sort events
@@ -23,6 +25,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - api endpoint for agenda (data mocked)
 
 ### Changed
+- calendar account settings to fetch calendars
+- enable/disable fetched calendars and colorize them individually
 - first agenda section to be named "today"
 - agenda api result field names (from=start, to=end)
 - agenda item to correspond with changed api result

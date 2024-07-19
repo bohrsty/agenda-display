@@ -31,7 +31,7 @@ export const de = {
     'Delete': 'Löschen',
     'Cancel': 'Abbrechen',
     'New caldav connection': 'Neue Caldav-Verbindung',
-    'Edit caldav connection "{{connectionName}}"': 'Caldav-Verbindung "{{connectionName}}" bearbeiten',
+    'Edit caldav connection': 'Caldav-Verbindung bearbeiten',
     'Please fill the following fields (* mandatory)': 'Bitte folgende Felder ausfüllen (* erforderlich)',
     'Connection name': 'Name der Verbindung',
     'Username': 'Benutzername',
@@ -45,4 +45,7 @@ export const de = {
     'Enter new password to change it': 'Neues Passwort eingeben, um es zu ändern',
     'Today': 'Heute',
     'o\'clock': 'Uhr',
+    'Fetch calendars': 'Kalender abrufen',
+    'Check to show in agenda': 'Anhaken, um es in der Agenda an zu zeigen',
+    'The following error occurred while fetching the calendars:': 'Folgender Fehler trat beim Abrufen der Kalender auf:',
 }

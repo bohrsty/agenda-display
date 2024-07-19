@@ -16,11 +16,8 @@ import DeleteTwoToneIcon from '@mui/icons-material/DeleteTwoTone';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import { useTranslation } from '../contexts/LocalisationContext.jsx';
-import { useGlobalState } from '../contexts/GlobalStateContext.jsx';
 
 export const SettingsCalendarItem = ({ calendar, editConnection, deleteConnection }) => {
-    // get global state
-    const { state } = useGlobalState();
     // get translation
     const { t } = useTranslation();
 
@@ -48,8 +45,8 @@ export const SettingsCalendarItem = ({ calendar, editConnection, deleteConnectio
             }
         >
             <ListItemText
-                primary={`${calendar.name} (${calendar.username})`}
-                secondary={calendar.url}
+                primary={calendar.serverUrl}
+                secondary={calendar.account.username}
             />
         </ListItem>
     );

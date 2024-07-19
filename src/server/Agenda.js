@@ -24,14 +24,43 @@ import { useCryptr } from './utils.js';
 
 
 /**
+ *
+ * @param {String} serverUrl the server url to fetch the calendars from
+ * @param {String} username the username for the dav account
+ * @param {String} password the password for the dav account
+ * @return {Array} array containing the calendars of the dav account
+ */
+export const fetchDavCalendars = async (serverUrl, username, password) => {
+    const basicAuth = `Basic ${btoa(`${username}:${password}`)}`;
+
+    // create dav account
+    const account = await createAccount({
+        account: {
+            serverUrl: serverUrl,
+            accountType: 'caldav',
+        },
+        headers: {
+            authorization: basicAuth,
+        },
+    });
+
+    // get calendars
+    return await fetchCalendars({
+        account: account,
+        headers: {
+            authorization: basicAuth,
+        },
+    });
+}
+
+/**
  * get, merge and return the dav calendar entries
  *
- * @param {Array} calendars the dav calendar settings
  * @param {number} agendaLength the number of days the agenda should be displayed
  * @param {RedisClient} redis the redis client
  * @returns {Array} the agenda sections and appointments
  */
-export const getAgenda = async (calendars, agendaLength, redis) => {
+export const getAgenda = async (agendaLength, redis) => {
     // get cryptr functions
     const { decrypt } = useCryptr();
 
@@ -44,29 +73,12 @@ export const getAgenda = async (calendars, agendaLength, redis) => {
 
     // walk through calendar entries
     let allAppointments = await Promise.all(result[0].map(async (calendarEntry) => {
-        // prepare basic auth for this calendar entry
+        // prepare username and password
         const username = calendarEntry.account.username;
         const password = decrypt(calendarEntry.account.password);
         const basicAuth = `Basic ${btoa(`${username}:${password}`)}`;
-
-        // create dav account
-        const account = await createAccount({
-            account: {
-                serverUrl: calendarEntry.serverUrl,
-                accountType: 'caldav',
-            },
-            headers: {
-                authorization: basicAuth,
-            },
-        });
-
-        // get calendars
-        let davCalendars = await fetchCalendars({
-            account: account,
-            headers: {
-                authorization: basicAuth,
-            },
-        });
+        // fetch dav calendars
+        let davCalendars = await fetchDavCalendars(calendarEntry.serverUrl, username, password);
         davCalendars = davCalendars.filter((calendar) => calendarEntry.calendars.hasOwnProperty(calendar.url) && calendarEntry.calendars[calendar.url].enabled === true);
 
         // prepare start and end dates (end date +2, because today is shown always completely)

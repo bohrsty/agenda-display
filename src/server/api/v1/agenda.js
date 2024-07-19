@@ -19,12 +19,14 @@ import { getAgenda } from '../../Agenda.js';
 export const agenda = async (req, res) => {
 
     // get calendar settings
-    const result = await req.app.locals.redis.json.get('agendadisplay:settings', { path: '$' });
-    const calendars = result[0].calendars;
-    const agendaLength = result[0].agendaLength;
+    const result = await req.app.locals.redis.json.get('agendadisplay:settings', { path: '$.agendaLength' });
+    let agendaLength = 7;
+    if(result !== null) {
+        agendaLength = result[0];
+    }
 
     // get agenda
-    const agenda = await getAgenda(calendars, agendaLength, req.app.locals.redis);
+    const agenda = await getAgenda(agendaLength, req.app.locals.redis);
 
     return({
         agenda: agenda,

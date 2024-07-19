@@ -29,10 +29,12 @@ export const SettingsCalendars = () => {
     const [calendarForm, setCalendarForm] = useState({
         type: null,
         calendar: {
-            name: '',
-            username: '',
-            url: '',
-            color: '',
+            serverUrl: '',
+            account: {
+                username: '',
+                editPassword: '',
+            },
+            calendars: null,
         },
     });
     // get global state
@@ -44,7 +46,7 @@ export const SettingsCalendars = () => {
 
     // event handler to edit connection
     const handleEditConnection = (calendar) => {
-        calendar. password = '';
+        calendar.account.password = '';
         setCalendarForm({
             type: 'edit',
             calendar: calendar,
@@ -122,11 +124,12 @@ export const SettingsCalendars = () => {
                         onClick={() => setCalendarForm({
                             type: 'new',
                             calendar: {
-                                name: '',
-                                username: '',
-                                password: '',
-                                url: '',
-                                color: '',
+                                serverUrl: '',
+                                account: {
+                                    username: '',
+                                    password: '',
+                                },
+                                calendars: null,
                             },
                         })}
                         sx={{
