@@ -149,3 +149,6 @@ TODO
 
 # vite config backups
 vite.config.js.timestamp-*
+
+# releases
+*.tar.gz

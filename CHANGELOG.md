@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased](https://github.com/bohrsty/agenda-display/compare/v0.1.0...HEAD)
 ### Added
+- release script to prepare release locally
 - detection of calendars in settings
 - determination of text color according to background color in agenda item
 - agenda length setting in api
@@ -25,6 +26,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - api endpoint for agenda (data mocked)
 
 ### Changed
+- default refresh interval to 60 to prevent infinite error loop
+- dav calendar color cannot be empty (hide save button)
+- npm dependencies for frontend only to be devDependencies
 - calendar account settings to fetch calendars
 - enable/disable fetched calendars and colorize them individually
 - first agenda section to be named "today"

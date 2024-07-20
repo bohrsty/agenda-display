@@ -31,7 +31,7 @@ const result = await redisClient.json.get('agendadisplay:settings', { path: '$' 
 if(result === null) {
     // create settings structure
     await redisClient.json.set('agendadisplay:settings', '$', {
-        timeout: 0,
+        timeout: 60,
         calendars: [],
         agendaLength: 7,
     });
@@ -40,7 +40,7 @@ if(result === null) {
     const json = result[0];
     // timeout
     if(json.hasOwnProperty('refreshTimeout') === false) {
-        await redisClient.json.set('agendadisplay:settings', '$.refreshTimeout', 0);
+        await redisClient.json.set('agendadisplay:settings', '$.refreshTimeout', 60);
     }
     // calendars
     if(json.hasOwnProperty('calendars') === false) {

@@ -8,7 +8,10 @@
  */
 'use strict';
 
-import React, { useState } from 'react';
+import React, {
+    useState,
+    useEffect,
+} from 'react';
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
@@ -34,6 +37,25 @@ export const SettingsCalendarItemForm = ({ open, handleSave, handleCancel, data,
     const [snackbarOpen, setSnackbarOpen] = useState(false);
     // get alert content state
     const [alert, setAlert] = useState('');
+    // get color error state
+    const[colorError, setColorError] = useState(false);
+
+    // check color required error
+    useEffect(() => {
+        if(data.calendar.calendars !== null) {
+            // check enabled calendars
+            const error = Object.keys(data.calendar.calendars).map((url) => data.calendar.calendars[url])
+                .reduce((previous, current) => {
+                    if(current.enabled === true) {
+                        return previous || current.bgColor === '';
+                    } else {
+                        return previous;
+                    }
+                }, false);
+            // set result
+            setColorError(error);
+        }
+    }, [data.calendar.calendars]);
 
     // event handler to fetch calendars from api
     const handleFetchCalendars = async () => {
@@ -125,7 +147,7 @@ export const SettingsCalendarItemForm = ({ open, handleSave, handleCancel, data,
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={() => handleCancel()}>{t('Cancel')}</Button>
-                    {data.calendar.calendars !== null ? <Button onClick={() => handleSave()}>{t('Save')}</Button> : null}
+                    {data.calendar.calendars !== null && colorError === false ? <Button onClick={() => handleSave()}>{t('Save')}</Button> : null}
                     <Button onClick={() => handleFetchCalendars()}>{t('Fetch calendars')}</Button>
                 </DialogActions>
             </Dialog>
