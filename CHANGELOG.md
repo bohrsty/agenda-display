@@ -6,10 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased](https://github.com/bohrsty/agenda-display/compare/v0.2.0...HEAD)
 ### Added
+- differentiation of all day events
 
 ### Changed
+- typos
+- look of all day events
 
-## [v0.1.0](https://github.com/bohrsty/agenda-display/compare/v0.1.0...v0.2.0)
+## [v0.2.0](https://github.com/bohrsty/agenda-display/compare/v0.1.0...v0.2.0)
 ### Added
 - release script to prepare release locally
 - detection of calendars in settings

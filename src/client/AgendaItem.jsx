@@ -44,7 +44,7 @@ export const AgendaItem = ({ agendaItem }) => {
                     },
                 }}
                 primary={`${agendaItem.title}${agendaItem.location !== null ? `, ${agendaItem.location}` : ''}${agendaItem.text !== null ? ` (${agendaItem.text})` : ''}`}
-                secondary={`${format(agendaItem.start, 'HH:mm', dfnsLocale)} - ${format(agendaItem.end, 'HH:mm', dfnsLocale)} ${t('o\'clock')}`}
+                secondary={agendaItem.allDay === false ? `${format(agendaItem.start, 'HH:mm', dfnsLocale)} - ${format(agendaItem.end, 'HH:mm', dfnsLocale)} ${t('o\'clock')}` : undefined}
             />
         </ListItem>
     );

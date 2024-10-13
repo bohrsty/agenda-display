@@ -31,7 +31,7 @@ const result = await redisClient.json.get('agendadisplay:settings', { path: '$' 
 if(result === null) {
     // create settings structure
     await redisClient.json.set('agendadisplay:settings', '$', {
-        timeout: 60,
+        refreshTimeout: 60,
         calendars: [],
         agendaLength: 7,
     });

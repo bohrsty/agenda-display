@@ -170,6 +170,7 @@ const parseDavToEvents = (dav, start, end) => {
             title: e.summary,
             location: e.location,
             text: e.description,
+            allDay: e.component.jCal[1].filter((a) => a[0] === 'dtstart')[0][2] === 'date',
         }));
         const mappedOccurrences = events.occurrences.map(o => ({
             start: o.startDate.toJSDate(),
@@ -177,6 +178,7 @@ const parseDavToEvents = (dav, start, end) => {
             title: o.item.summary,
             location: o.item.location,
             text: o.item.description,
+            allDay: o.item.component.jCal[1].filter((a) => a[0] === 'dtstart')[0][2] === 'date',
         }));
         return [].concat(mappedEvents, mappedOccurrences);
     }).reduce((previous, current) => previous.concat(current), []);
