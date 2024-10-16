@@ -18,6 +18,7 @@ import {
     addDays,
     compareAsc,
     isSameDay,
+    eachDayOfInterval,
 } from 'date-fns';
 import IcalExpander from 'ical-expander';
 import { useCryptr } from './utils.js';
@@ -112,7 +113,36 @@ export const getAgenda = async (agendaLength, redis) => {
         // reduce and return events from all dav calendars
         return appointments.reduce((previous, current) => previous.concat(current), []);
     }));
-    allAppointments = allAppointments.reduce((previous, current) => previous.concat(current), []);
+    const reducedAppointments = allAppointments.reduce((previous, current) => previous.concat(current), []);
+
+    // handle multi day events
+    allAppointments = [];
+    reducedAppointments.forEach((appointment) => {
+        // check same day
+        if(isSameDay(appointment.start, appointment.end) === false) {
+            // remember original start
+            appointment.multipleDaysStart = appointment.start;
+            // set multiple day
+            appointment.multipleDays = true;
+            // get dates in interval
+            const multipleDays = eachDayOfInterval({
+                start: appointment.start,
+                end: appointment.end,
+            });
+            // walk through dates in interval
+            multipleDays.forEach((day) => {
+                // clone appointment
+                const nextAppointment = {...appointment};
+                // set start to interval date
+                nextAppointment.start = day;
+                // add to list
+                allAppointments.push(nextAppointment);
+            });
+        } else {
+            // add to list
+            allAppointments.push(appointment);
+        }
+    });
 
     // sort all appointments
     allAppointments.sort((first, second) => {
@@ -171,6 +201,7 @@ const parseDavToEvents = (dav, start, end) => {
             location: e.location,
             text: e.description,
             allDay: e.component.jCal[1].filter((a) => a[0] === 'dtstart')[0][2] === 'date',
+            multipleDays: false,
         }));
         const mappedOccurrences = events.occurrences.map(o => ({
             start: o.startDate.toJSDate(),
@@ -179,6 +210,7 @@ const parseDavToEvents = (dav, start, end) => {
             location: o.item.location,
             text: o.item.description,
             allDay: o.item.component.jCal[1].filter((a) => a[0] === 'dtstart')[0][2] === 'date',
+            multipleDays: false,
         }));
         return [].concat(mappedEvents, mappedOccurrences);
     }).reduce((previous, current) => previous.concat(current), []);

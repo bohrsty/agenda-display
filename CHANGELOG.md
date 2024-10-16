@@ -7,10 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased](https://github.com/bohrsty/agenda-display/compare/v0.2.0...HEAD)
 ### Added
 - differentiation of all day events
+- handling of multiple day events
 
 ### Changed
 - typos
 - look of all day events
+- date and time format of multiple day events
+- fixed dfns-options in AgendaItem
 
 ## [v0.2.0](https://github.com/bohrsty/agenda-display/compare/v0.1.0...v0.2.0)
 ### Added
